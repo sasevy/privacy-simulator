@@ -28,23 +28,6 @@
             margin-bottom: 10px;
         }
         
-        h2 {
-            color: #3498db;
-            font-size: 1.4em;
-            margin-top: 25px;
-            margin-bottom: 15px;
-        }
-        
-        .setting-group {
-            border-bottom: 1px solid #eee;
-            padding-bottom: 20px;
-            margin-bottom: 20px;
-        }
-        
-        .setting-group:last-child {
-            border-bottom: none;
-        }
-        
         .toggle-container {
             display: flex;
             justify-content: space-between;
@@ -81,7 +64,6 @@
             transform: translateX(-50%);
             opacity: 0;
             transition: opacity 0.3s;
-            font-weight: normal;
             font-size: 14px;
             line-height: 1.4;
         }
@@ -132,10 +114,6 @@
             background-color: #2196F3;
         }
         
-        input:focus + .slider {
-            box-shadow: 0 0 1px #2196F3;
-        }
-        
         input:checked + .slider:before {
             transform: translateX(26px);
         }
@@ -171,15 +149,6 @@
             transition: width 0.5s ease;
         }
         
-        .risk-marker {
-            position: absolute;
-            top: -10px;
-            width: 2px;
-            height: 40px;
-            background-color: #34495e;
-            transform: translateX(-50%);
-        }
-        
         .protection-summary {
             margin-top: 30px;
             padding: 15px;
@@ -198,36 +167,9 @@
             margin-top: 10px;
             color: #555;
         }
-        
-        .did-you-know {
-            margin-top: 30px;
-            padding: 15px;
-            border-radius: 8px;
-            background-color: #f0f9ff;
-            border-left: 4px solid #2980b9;
-        }
-        
-        .did-you-know h3 {
-            margin-top: 0;
-            color: #2980b9;
-        }
-        
-        /* Mobile Responsive Design */
+
         @media (max-width: 600px) {
-            .simulator-container {
-                padding: 15px;
-            }
-            
-            .toggle-container {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .toggle-switch {
-                margin-top: 10px;
-            }
-            
-            .info-icon .tooltip {
+            .tooltip {
                 width: 200px;
                 left: 0;
                 transform: none;
@@ -237,135 +179,27 @@
 </head>
 <body>
     <h1>VR Medical Training Privacy Simulator</h1>
-    <p>Adjust the privacy settings below to see how they affect data security in a medical VR training environment. Can you find the right balance between functionality and privacy protection?</p>
+    <p>Adjust the privacy settings below to see how they affect data security.</p>
     
     <div class="simulator-container">
         <h2>Data Collection Settings</h2>
-        <div class="setting-group">
-            <div class="toggle-container">
-                <span class="toggle-label">
-                    Biometric Data (Eye movements, heart rate)
-                    <span class="info-icon">ⓘ
-                        <span class="tooltip">Tracks precise eye movements, pupil dilation, heart rate, and other physiological responses during training sessions.</span>
-                    </span>
-                </span>
-                <label class="toggle-switch">
-                    <input type="checkbox" id="biometric" checked>
-                    <span class="slider"></span>
-                </label>
-            </div>
-            
-            <div class="toggle-container">
-                <span class="toggle-label">
-                    Performance Metrics
-                    <span class="info-icon">ⓘ
-                        <span class="tooltip">Collects data on procedure times, accuracy, errors, and decision-making patterns during medical simulations.</span>
-                    </span>
-                </span>
-                <label class="toggle-switch">
-                    <input type="checkbox" id="performance" checked>
-                    <span class="slider"></span>
-                </label>
-            </div>
-            
-            <div class="toggle-container">
-                <span class="toggle-label">
-                    Training Room Video Recording
-                    <span class="info-icon">ⓘ
-                        <span class="tooltip">Records video of the trainee in the physical space while using VR, which may include other people or sensitive information in the background.</span>
-                    </span>
-                </span>
-                <label class="toggle-switch">
-                    <input type="checkbox" id="video">
-                    <span class="slider"></span>
-                </label>
-            </div>
+        <div class="toggle-container">
+            <span class="toggle-label">Biometric Data</span>
+            <label class="toggle-switch">
+                <input type="checkbox" id="biometric" checked>
+                <span class="slider"></span>
+            </label>
         </div>
         
-        <h2>Encryption Settings</h2>
-        <div class="setting-group">
-            <div class="toggle-container">
-                <span class="toggle-label">
-                    End-to-End Encryption
-                    <span class="info-icon">ⓘ
-                        <span class="tooltip">Data is encrypted on your device and can only be decrypted by authorized recipients. No one in the middle, including the VR platform provider, can access the unencrypted data.</span>
-                    </span>
-                </span>
-                <label class="toggle-switch">
-                    <input type="checkbox" id="e2e">
-                    <span class="slider"></span>
-                </label>
-            </div>
-            
-            <div class="toggle-container">
-                <span class="toggle-label">
-                    Local Storage Only (No Cloud)
-                    <span class="info-icon">ⓘ
-                        <span class="tooltip">Data remains only on the local institution's servers and is never transmitted to cloud services, significantly reducing exposure to external breaches.</span>
-                    </span>
-                </span>
-                <label class="toggle-switch">
-                    <input type="checkbox" id="local">
-                    <span class="slider"></span>
-                </label>
-            </div>
-            
-            <div class="toggle-container">
-                <span class="toggle-label">
-                    Data Anonymization
-                    <span class="info-icon">ⓘ
-                        <span class="tooltip">Personal identifiers are removed from the data, replacing them with random codes that cannot be traced back to individuals without a separate, secured key.</span>
-                    </span>
-                </span>
-                <label class="toggle-switch">
-                    <input type="checkbox" id="anonymize">
-                    <span class="slider"></span>
-                </label>
-            </div>
+        <div class="toggle-container">
+            <span class="toggle-label">Performance Metrics</span>
+            <label class="toggle-switch">
+                <input type="checkbox" id="performance" checked>
+                <span class="slider"></span>
+            </label>
         </div>
         
-        <h2>Data Sharing Settings</h2>
-        <div class="setting-group">
-            <div class="toggle-container">
-                <span class="toggle-label">
-                    Share with Medical Researchers
-                    <span class="info-icon">ⓘ
-                        <span class="tooltip">Allows anonymized data to be shared with approved medical research institutions to improve training methods and medical education.</span>
-                    </span>
-                </span>
-                <label class="toggle-switch">
-                    <input type="checkbox" id="researchers" checked>
-                    <span class="slider"></span>
-                </label>
-            </div>
-            
-            <div class="toggle-container">
-                <span class="toggle-label">
-                    Share with VR Developers
-                    <span class="info-icon">ⓘ
-                        <span class="tooltip">Provides usage data to the VR system developers to improve software functionality, user experience, and training algorithms.</span>
-                    </span>
-                </span>
-                <label class="toggle-switch">
-                    <input type="checkbox" id="developers" checked>
-                    <span class="slider"></span>
-                </label>
-            </div>
-            
-            <div class="toggle-container">
-                <span class="toggle-label">
-                    Share with Commercial Partners
-                    <span class="info-icon">ⓘ
-                        <span class="tooltip">Allows data to be shared with pharmaceutical companies, medical device manufacturers, and other commercial entities that may use it for product development or marketing.</span>
-                    </span>
-                </span>
-                <label class="toggle-switch">
-                    <input type="checkbox" id="commercial">
-                    <span class="slider"></span>
-                </label>
-            </div>
-        </div>
-        
+        <h2>Privacy Risk</h2>
         <div class="risk-meter">
             <div class="risk-label">
                 <span>Privacy Risk Level</span>
@@ -376,99 +210,43 @@
             </div>
         </div>
         
-        <div class="protection-summary" id="protection-summary">
+        <div class="protection-summary">
             <p><strong>Current Protection Level:</strong> <span id="protection-level">Moderate</span></p>
-            <p class="encryption-level" id="encryption-text">Your data has basic transit encryption but may be vulnerable while stored or processed.</p>
-            <p class="breach-risk" id="breach-text">A data breach could potentially expose trainee performance metrics and some biometric data.</p>
-        </div>
-        
-        <div class="did-you-know">
-            <h3>Did You Know?</h3>
-            <p>A 2024 study found that 34% of healthcare VR applications lacked end-to-end encryption, leaving sensitive trainee and patient data vulnerable to breaches.</p>
         </div>
     </div>
     
     <script>
-        // This is the JavaScript that powers the interactive simulator
         document.addEventListener('DOMContentLoaded', function() {
-            // Get all toggle switches
             const toggles = document.querySelectorAll('input[type="checkbox"]');
+            const riskFill = document.getElementById('risk-fill');
+            const riskPercentage = document.getElementById('risk-percentage');
+            const protectionLevel = document.getElementById('protection-level');
             
-            // Add event listeners to all toggles
+            function updateRiskLevel() {
+                let risk = 100;
+                toggles.forEach(toggle => {
+                    if (toggle.checked) risk -= 15;
+                });
+                
+                risk = Math.max(0, risk);
+                riskFill.style.width = risk + '%';
+                riskPercentage.textContent = risk + '%';
+                
+                if (risk > 75) {
+                    protectionLevel.textContent = 'Low';
+                } else if (risk > 50) {
+                    protectionLevel.textContent = 'Moderate';
+                } else {
+                    protectionLevel.textContent = 'High';
+                }
+            }
+
             toggles.forEach(toggle => {
                 toggle.addEventListener('change', updateRiskLevel);
             });
-            
-            // Initialize the risk level display
+
             updateRiskLevel();
         });
-
-        function updateRiskLevel() {
-            // Get the state of all toggles
-            const biometric = document.getElementById('biometric').checked;
-            const performance = document.getElementById('performance').checked;
-            const video = document.getElementById('video').checked;
-            
-            const e2e = document.getElementById('e2e').checked;
-            const local = document.getElementById('local').checked;
-            const anonymize = document.getElementById('anonymize').checked;
-            
-            const researchers = document.getElementById('researchers').checked;
-            const developers = document.getElementById('developers').checked;
-            const commercial = document.getElementById('commercial').checked;
-            
-            // Calculate base risk level - start at medium risk
-            let risk = 50; 
-            
-            // Data collection risks
-            if (biometric) risk += 10;
-            if (performance) risk += 5;
-            if (video) risk += 15;
-            
-            // Encryption protections (reduce risk)
-            if (e2e) risk -= 20;
-            if (local) risk -= 15;
-            if (anonymize) risk -= 15;
-            
-            // Data sharing risks
-            if (researchers) risk += 5;
-            if (developers) risk += 10;
-            if (commercial) risk += 20;
-            
-            // Ensure risk stays within 0-100 range
-            risk = Math.max(0, Math.min(100, risk));
-            
-            // Update the UI
-            document.getElementById('risk-percentage').textContent = risk + '%';
-            document.getElementById('risk-fill').style.width = risk + '%';
-            
-            // Update protection level and text based on risk
-            let protectionLevel, encryptionText, breachText;
-            let bgColor;
-            
-            if (risk < 30) {
-                protectionLevel = "High";
-                encryptionText = "Your data is well-protected with end-to-end encryption and minimal sharing.";
-                breachText = "Risk of data exposure is minimal.";
-                bgColor = "#e8f5e9"; // Light green
-            } else if (risk < 70) {
-                protectionLevel = "Moderate";
-                encryptionText = "Your data has basic transit encryption but may be vulnerable while stored or processed.";
-                breachText = "A data breach could potentially expose trainee performance metrics and some biometric data.";
-                bgColor = "#fff3e0"; // Light orange
-            } else {
-                protectionLevel = "Low";
-                encryptionText = "Your data has minimal protection and is highly vulnerable to breaches.";
-                breachText = "A data breach would likely expose sensitive biometric data, performance metrics, and potentially identifiable information.";
-                bgColor = "#ffebee"; // Light red
-            }
-            
-            // Update the protection summary
-            document.getElementById('protection-level').textContent = protectionLevel;
-            document.getElementById('encryption-text').textContent = encryptionText;
-            document.getElementById('breach-text').textContent = breachText;
-            document.querySelector('.risk-meter').style.backgroundColor = bgColor;
-        }
     </script>
 </body>
 </html>
