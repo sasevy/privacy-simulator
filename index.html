@@ -389,38 +389,51 @@
     </div>
     
     <script>
-        // This is the JavaScript that would power the interactive simulator
-        // For Substack, you would host this entire file elsewhere and embed it via iframe
-        
-        // In a real implementation, these event listeners would update the risk meter and summaries
+        // This is the JavaScript that powers the interactive simulator
         document.addEventListener('DOMContentLoaded', function() {
+            // Get all toggle switches
             const toggles = document.querySelectorAll('input[type="checkbox"]');
+            
+            // Add event listeners to all toggles
             toggles.forEach(toggle => {
                 toggle.addEventListener('change', updateRiskLevel);
             });
             
-            // Initial update
+            // Initialize the risk level display
             updateRiskLevel();
         });
-        
+
         function updateRiskLevel() {
-            // Calculate risk based on selected options
-            let risk = 50; // Start at medium risk
+            // Get the state of all toggles
+            const biometric = document.getElementById('biometric').checked;
+            const performance = document.getElementById('performance').checked;
+            const video = document.getElementById('video').checked;
+            
+            const e2e = document.getElementById('e2e').checked;
+            const local = document.getElementById('local').checked;
+            const anonymize = document.getElementById('anonymize').checked;
+            
+            const researchers = document.getElementById('researchers').checked;
+            const developers = document.getElementById('developers').checked;
+            const commercial = document.getElementById('commercial').checked;
+            
+            // Calculate base risk level - start at medium risk
+            let risk = 50; 
             
             // Data collection risks
-            if (document.getElementById('biometric').checked) risk += 10;
-            if (document.getElementById('performance').checked) risk += 5;
-            if (document.getElementById('video').checked) risk += 15;
+            if (biometric) risk += 10;
+            if (performance) risk += 5;
+            if (video) risk += 15;
             
-            // Encryption protections
-            if (document.getElementById('e2e').checked) risk -= 20;
-            if (document.getElementById('local').checked) risk -= 15;
-            if (document.getElementById('anonymize').checked) risk -= 15;
+            // Encryption protections (reduce risk)
+            if (e2e) risk -= 20;
+            if (local) risk -= 15;
+            if (anonymize) risk -= 15;
             
             // Data sharing risks
-            if (document.getElementById('researchers').checked) risk += 5;
-            if (document.getElementById('developers').checked) risk += 10;
-            if (document.getElementById('commercial').checked) risk += 20;
+            if (researchers) risk += 5;
+            if (developers) risk += 10;
+            if (commercial) risk += 20;
             
             // Ensure risk stays within 0-100 range
             risk = Math.max(0, Math.min(100, risk));
@@ -429,15 +442,33 @@
             document.getElementById('risk-percentage').textContent = risk + '%';
             document.getElementById('risk-fill').style.width = risk + '%';
             
-            // Update protection level text
+            // Update protection level and text based on risk
             let protectionLevel, encryptionText, breachText;
+            let bgColor;
             
             if (risk < 30) {
                 protectionLevel = "High";
                 encryptionText = "Your data is well-protected with end-to-end encryption and minimal sharing.";
                 breachText = "Risk of data exposure is minimal.";
-                document.querySelector('.risk-meter').style.backgroundColor = "#e8f5e9";
+                bgColor = "#e8f5e9"; // Light green
             } else if (risk < 70) {
                 protectionLevel = "Moderate";
                 encryptionText = "Your data has basic transit encryption but may be vulnerable while stored or processed.";
                 breachText = "A data breach could potentially expose trainee performance metrics and some biometric data.";
+                bgColor = "#fff3e0"; // Light orange
+            } else {
+                protectionLevel = "Low";
+                encryptionText = "Your data has minimal protection and is highly vulnerable to breaches.";
+                breachText = "A data breach would likely expose sensitive biometric data, performance metrics, and potentially identifiable information.";
+                bgColor = "#ffebee"; // Light red
+            }
+            
+            // Update the protection summary
+            document.getElementById('protection-level').textContent = protectionLevel;
+            document.getElementById('encryption-text').textContent = encryptionText;
+            document.getElementById('breach-text').textContent = breachText;
+            document.querySelector('.risk-meter').style.backgroundColor = bgColor;
+        }
+    </script>
+</body>
+</html>
